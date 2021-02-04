@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[tblColor]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Description] VARCHAR(50) NOT NULL, 
+    [Code] INT NOT NULL
+)

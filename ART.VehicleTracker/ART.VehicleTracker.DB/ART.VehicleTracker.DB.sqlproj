@@ -57,8 +57,31 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="PreDeployment" />
+    <Folder Include="PostDeployment" />
+    <Folder Include="PostDeployment\DefaultData" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="ForeignKeys" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblModel.sql" />
+    <Build Include="Tables\tblVehicle.sql" />
+    <Build Include="Tables\tblMake.sql" />
+    <Build Include="Tables\tblColor.sql" />
+    <Build Include="ForeignKeys\tblVehicle_ColorId.sql" />
+    <Build Include="ForeignKeys\tblVehicle_ModelId.sql" />
+    <Build Include="ForeignKeys\tblVehicle_MakeId.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="PreDeployment\Script.PreDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployment\Script.PostDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\DefaultData\Vehicles.sql" />
+    <None Include="PostDeployment\DefaultData\Makes.sql" />
+    <None Include="PostDeployment\DefaultData\Models.sql" />
+    <None Include="PostDeployment\DefaultData\Colors.sql" />
   </ItemGroup>
 </Project>
