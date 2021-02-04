@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PostDeployment\DefaultData\Vehicles.sql" />
-    <None Include="PostDeployment\DefaultData\Makes.sql" />
+    <None Include="PostDeployment\DefaultData\Makers.sql" />
     <None Include="PostDeployment\DefaultData\Models.sql" />
     <None Include="PostDeployment\DefaultData\Colors.sql" />
   </ItemGroup>
