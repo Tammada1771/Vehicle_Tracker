@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ART.VehicleTracker.DB", "ART.VehicleTracker.DB\ART.VehicleTracker.DB.sqlproj", "{A87C8CD0-EC72-4E37-897F-040AE8515CD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.BL.Models", "ART.VehicleTracker.BL.Models\ART.VehicleTracker.BL.Models.csproj", "{B9EE75B3-CC8B-48C5-94DD-093D41A53FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.BL.Models", "ART.VehicleTracker.BL.Models\ART.VehicleTracker.BL.Models.csproj", "{B9EE75B3-CC8B-48C5-94DD-093D41A53FAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.PL", "ART.VehicleTracker.PL\ART.VehicleTracker.PL.csproj", "{EB6AEC71-AFE9-4E0C-96FE-0D7D15466CFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{B9EE75B3-CC8B-48C5-94DD-093D41A53FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9EE75B3-CC8B-48C5-94DD-093D41A53FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9EE75B3-CC8B-48C5-94DD-093D41A53FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB6AEC71-AFE9-4E0C-96FE-0D7D15466CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB6AEC71-AFE9-4E0C-96FE-0D7D15466CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB6AEC71-AFE9-4E0C-96FE-0D7D15466CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB6AEC71-AFE9-4E0C-96FE-0D7D15466CFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
