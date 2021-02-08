@@ -77,7 +77,7 @@ namespace ART.VehicleTracker.PL
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Vin)
+                entity.Property(e => e.VIN)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false)
