@@ -60,12 +60,67 @@ namespace ART.VehicleTracker.BL
 
         public async static Task<int> Delete(Guid id, bool rollback = false)
         {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblColor row = dc.tblColors.FirstOrDefault(c => c.Id == id);
+                    int results = 0;
+                    if(row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
 
+                        dc.tblColors.Remove(row);
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async static Task<int> Update(Models.Color color, bool rollback = false)
         {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblColor row = dc.tblColors.FirstOrDefault(c => c.Id == color.Id);
+                    int results = 0;
+                    if (row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
 
+                        row.Code = color.Code;
+                        row.Description = color.Description;
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async static Task<Models.Color> LoadById(Guid id)
@@ -82,6 +137,8 @@ namespace ART.VehicleTracker.BL
                         color.Id = tblcolor.Id;
                         color.Description = tblcolor.Description;
                         color.Code = tblcolor.Code;
+
+                        return color;
                     }
                     else
                     {
@@ -96,9 +153,30 @@ namespace ART.VehicleTracker.BL
             }
         }
 
-        public async static Task<List<Models.Color>> Load()
+        public async static Task<IEnumerable<Models.Color>> Load()
         {
+            try
+            {
+                List<Models.Color> colors = new List<Color>();
 
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    dc.tblColors
+                        .ToList()
+                        .ForEach(c => colors.Add(new Models.Color
+                        {
+                            Id = c.Id,
+                            Code =c.Code,
+                            Description = c.Description
+                        }));
+                    return colors;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
 

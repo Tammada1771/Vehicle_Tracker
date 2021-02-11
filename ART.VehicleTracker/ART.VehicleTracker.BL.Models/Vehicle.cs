@@ -13,6 +13,8 @@ namespace ART.VehicleTracker.BL.Models
         public int Year { get; set; }
         public Guid ColorId { get; set; }
         public Guid MakeId { get; set; }
+        
+        public Guid ModelId { get; set; }
 
     }
 }
