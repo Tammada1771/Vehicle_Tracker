@@ -42,5 +42,65 @@ namespace ART.VehicleTracker.BL
                 throw ex;
             }
         }
+
+        public async static Task<Guid> Insert(int code, string description, bool rollback = false)
+        {
+            try
+            {
+                Models.Color color = new Models.Color { Code = code, Description = description };
+                await Insert(color);
+                return color.Id;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async static Task<int> Delete(Guid id, bool rollback = false)
+        {
+
+        }
+
+        public async static Task<int> Update(Models.Color color, bool rollback = false)
+        {
+
+        }
+
+        public async static Task<Models.Color> LoadById(Guid id)
+        {
+            try
+            {
+                using(VehicleEntities dc = new VehicleEntities())
+                {
+                    tblColor tblcolor = dc.tblColors.FirstOrDefault(c => c.Id == id);
+                    Models.Color color = new Models.Color();
+
+                    if(tblcolor != null)
+                    {
+                        color.Id = tblcolor.Id;
+                        color.Description = tblcolor.Description;
+                        color.Code = tblcolor.Code;
+                    }
+                    else
+                    {
+                        throw new Exception("Could not find the row");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async static Task<List<Models.Color>> Load()
+        {
+
+        }
+
+
     }
 }
