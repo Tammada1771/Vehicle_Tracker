@@ -83,5 +83,6 @@
     <None Include="PostDeployment\DefaultData\Makers.sql" />
     <None Include="PostDeployment\DefaultData\Models.sql" />
     <None Include="PostDeployment\DefaultData\Colors.sql" />
+    <None Include="Local.publish.xml" />
   </ItemGroup>
 </Project>
