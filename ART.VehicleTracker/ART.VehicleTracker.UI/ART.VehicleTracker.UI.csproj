@@ -6,4 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ART.VehicleTracker.BL.Models\ART.VehicleTracker.BL.Models.csproj" />
+    <ProjectReference Include="..\ART.VehicleTracker.BL\ART.VehicleTracker.BL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -32,12 +32,12 @@ namespace ART.VehicleTracker.UI
 
         private void BtnMakes_Click(object sender, RoutedEventArgs e)
         {
-
+            new MaintainAttributes(ScreenMode.Make).ShowDialog();
         }
 
         private void BtnModels_Click(object sender, RoutedEventArgs e)
         {
-
+            new MaintainAttributes(ScreenMode.Model).ShowDialog();
         }
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
