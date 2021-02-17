@@ -154,6 +154,9 @@ namespace ART.VehicleTracker.BL
                         vehicle.ModelId = tblvehicle.ModelId;
                         vehicle.VIN = tblvehicle.VIN;
                         vehicle.Year = tblvehicle.Year;
+                        vehicle.ColorName = tblvehicle.Color.Description;
+                        vehicle.MakeName = tblvehicle.Make.Description;
+                        vehicle.ModelName = tblvehicle.Model.Description;
 
                         return vehicle;
                     }
@@ -174,20 +177,23 @@ namespace ART.VehicleTracker.BL
         {
             try
             {
-                List<Models.Vehicle> vehicles = new List<Vehicle>();
+                List<Vehicle> vehicles = new List<Vehicle>();
 
                 using (VehicleEntities dc = new VehicleEntities())
                 {
                     dc.tblVehicles
                         .ToList()
-                        .ForEach(c => vehicles.Add(new Models.Vehicle
+                        .ForEach(c => vehicles.Add(new Vehicle
                         {
                             Id = c.Id,
                             ColorId = c.ColorId,
                             MakeId = c.MakeId,
                             ModelId = c.ModelId,
                             VIN = c.VIN,
-                            Year = c.Year
+                            Year = c.Year,
+                            ColorName = c.Color.Description,
+                            MakeName = c.Make.Description,
+                            ModelName = c.Model.Description
                 }));
                     return vehicles;
                 }

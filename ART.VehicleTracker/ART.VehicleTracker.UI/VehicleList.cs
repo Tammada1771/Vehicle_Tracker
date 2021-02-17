@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ART.VehicleTracker.BL;
+using ART.VehicleTracker.BL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,7 @@ namespace ART.VehicleTracker.UI
     /// </summary>
     public partial class VehicleList : Window
     {
+        List<Vehicle> vehicles;
         public VehicleList()
         {
             InitializeComponent();
@@ -42,17 +45,26 @@ namespace ART.VehicleTracker.UI
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
+            Reload();
+        }
+
+        private async void Reload()
+        {
+            vehicles = (List<Vehicle>)await VehicleManager.Load();
+            grdVehicles.ItemsSource = null;
+            grdVehicles.ItemsSource = vehicles;
+
 
         }
 
         private void BtnNewVehicle_Click(object sender, RoutedEventArgs e)
         {
-
+            new MaintainVehicle().ShowDialog();
         }
 
         private void BtnEditVehicle_Click(object sender, RoutedEventArgs e)
         {
-
+            new MaintainVehicle().ShowDialog();
         }
 
         private void BtnExport_Click(object sender, RoutedEventArgs e)

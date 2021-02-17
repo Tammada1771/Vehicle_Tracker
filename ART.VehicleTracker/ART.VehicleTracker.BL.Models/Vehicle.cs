@@ -16,5 +16,9 @@ namespace ART.VehicleTracker.BL.Models
         
         public Guid ModelId { get; set; }
 
+        public string ColorName { get; set; }
+        public string MakeName { get; set; }
+        public string ModelName { get; set; }
+
     }
 }
