@@ -54,6 +54,16 @@ namespace ART.VehicleTracker.UI
             grdVehicles.ItemsSource = null;
             grdVehicles.ItemsSource = vehicles;
 
+            //0, 3, 4,5 
+            grdVehicles.Columns[0].Visibility = Visibility.Hidden;
+            grdVehicles.Columns[3].Visibility = Visibility.Hidden;
+            grdVehicles.Columns[4].Visibility = Visibility.Hidden;
+            grdVehicles.Columns[5].Visibility = Visibility.Hidden;
+
+            // 6, 7, 8
+            grdVehicles.Columns[6].Header = "Color";
+            grdVehicles.Columns[7].Header = "Make";
+            grdVehicles.Columns[8].Header = "Model";
 
         }
 
