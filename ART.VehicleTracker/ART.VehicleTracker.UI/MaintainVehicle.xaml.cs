@@ -54,6 +54,11 @@ namespace ART.VehicleTracker.UI
             ucMaintainVehicle ucModels = new ucMaintainVehicle(ControlMode.Model, vehicle.ModelId);
             ucMaintainVehicle ucYears = new ucMaintainVehicle(ControlMode.Year, vehicle.Year);
 
+            ucColors.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
+            ucMakes.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
+            ucModels.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
+            ucYears.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
+
             ucColors.Margin = new Thickness(40, 25, 0, 0);
             ucMakes.Margin = new Thickness(40, 60, 0, 0);
             ucModels.Margin = new Thickness(40, 95, 0, 0);
@@ -76,12 +81,18 @@ namespace ART.VehicleTracker.UI
             btnUpdate.Margin = new Thickness(196, 200, 0, 0);
         }
 
+        private void ImgDelete_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Title = "Picked the image " + DateTime.Now;
+        }
+
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
             vehicle.ColorId = attributes[(int)ControlMode.Color].AttributeId;
             vehicle.MakeId = attributes[(int)ControlMode.Make].AttributeId;
             vehicle.ModelId = attributes[(int)ControlMode.Model].AttributeId;
             vehicle.Year = Convert.ToInt32(attributes[(int)ControlMode.Year].AttributeText);
+            vehicle.VIN = txtVIN.Text;
 
             int results = 0;
 
@@ -99,6 +110,7 @@ namespace ART.VehicleTracker.UI
             vehicle.MakeId = attributes[(int)ControlMode.Make].AttributeId;
             vehicle.ModelId = attributes[(int)ControlMode.Model].AttributeId;
             vehicle.Year = Convert.ToInt32(attributes[(int)ControlMode.Year].AttributeText);
+            vehicle.VIN = txtVIN.Text;
 
             int results = 0;
 

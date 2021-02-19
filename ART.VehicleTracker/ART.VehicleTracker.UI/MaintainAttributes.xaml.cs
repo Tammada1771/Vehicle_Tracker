@@ -86,20 +86,21 @@ namespace ART.VehicleTracker.UI
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
+            int results = 0;
             switch (screenMode)
             {
                 case ScreenMode.Make:
                     Task.Run(async () =>
                     {
                         Guid id = makes[cboAttribute.SelectedIndex].Id;
-                        await MakeManager.Delete(id);
+                        results = await MakeManager.Delete(id);
                     });
                     break;
                 case ScreenMode.Model:
                     Task.Run(async () =>
                     {
                         Guid id = models[cboAttribute.SelectedIndex].Id;
-                        await ModelManager.Delete(id);
+                        results = await ModelManager.Delete(id);
                     });
                     break;
             }
@@ -113,13 +114,13 @@ namespace ART.VehicleTracker.UI
                 case ScreenMode.Make:
                     Task.Run(async () =>
                     {
-                        await MakeManager.Insert(new Make { Description = txtDescription.Text });
+                        int results = await MakeManager.Insert(new Make { Description = txtDescription.Text });
                     });
                     break;
                 case ScreenMode.Model:
                     Task.Run(async () =>
                     {
-                        await ModelManager.Insert(new Model { Description = txtDescription.Text });
+                        int results = await ModelManager.Insert(new Model { Description = txtDescription.Text });
                     });
                     break;
 
