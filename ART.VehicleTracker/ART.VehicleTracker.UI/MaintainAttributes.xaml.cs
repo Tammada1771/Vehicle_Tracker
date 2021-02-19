@@ -64,6 +64,7 @@ namespace ART.VehicleTracker.UI
         {
             switch (screenMode)
             {
+                
                 case ScreenMode.Make:
                     Task.Run(async () =>
                     {
@@ -106,6 +107,7 @@ namespace ART.VehicleTracker.UI
 
         private void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
+
             switch (screenMode)
             {
                 case ScreenMode.Make:
@@ -120,6 +122,8 @@ namespace ART.VehicleTracker.UI
                         await ModelManager.Insert(new Model { Description = txtDescription.Text });
                     });
                     break;
+
+
             }
         }
 
@@ -133,5 +137,6 @@ namespace ART.VehicleTracker.UI
                     txtDescription.Text = models[cboAttribute.SelectedIndex].Description;
             }
         }
+
     }
 }

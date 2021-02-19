@@ -70,11 +70,13 @@ namespace ART.VehicleTracker.UI
         private void BtnNewVehicle_Click(object sender, RoutedEventArgs e)
         {
             new MaintainVehicle().ShowDialog();
+            Reload();
         }
 
         private void BtnEditVehicle_Click(object sender, RoutedEventArgs e)
         {
-            new MaintainVehicle().ShowDialog();
+            new MaintainVehicle(vehicles[grdVehicles.SelectedIndex]).ShowDialog();
+            Reload();
         }
 
         private void BtnExport_Click(object sender, RoutedEventArgs e)

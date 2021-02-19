@@ -17,19 +17,17 @@
                   HorizontalAlignment="Left" 
                   VerticalAlignment="Top" 
                   Width="155" 
-                  Height="23"
+                  Height="27"
                   Margin="110,21,0,0" 
                   SelectionChanged="CboAttribute_SelectionChanged">
 
         </ComboBox>
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" 
-                 Height="23" Width="155" 
-                 TextWrapping="Wrap" Margin="110,0,0,0"/>
         <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="27" Margin="110,125,0,0" Click="BtnUpdate_Click"/>
         <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="27" Margin="195,125,0,0" Click="BtnDelete_Click"/>
         <Button x:Name="btnInsert" Content="Insert" HorizontalAlignment="Left" Margin="25,125,0,0" VerticalAlignment="Top" Width="75" Height="27" Click="BtnInsert_Click"/>
         <Label x:Name="lblAttribute" Content="Label" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Foreground="White" Width="71" Height="27"/>
         <Label Content="Description:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Foreground="White" Width="89" Height="27"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="110,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Height="27"/>
 
     </Grid>
 </Window>

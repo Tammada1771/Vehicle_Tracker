@@ -1,4 +1,5 @@
-﻿using ART.VehicleTracker.BL.Models;
+﻿using ART.VehicleTracker.BL;
+using ART.VehicleTracker.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,17 +78,49 @@ namespace ART.VehicleTracker.UI
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            vehicle.ColorId = attributes[(int)ControlMode.Color].AttributeId;
+            vehicle.MakeId = attributes[(int)ControlMode.Make].AttributeId;
+            vehicle.ModelId = attributes[(int)ControlMode.Model].AttributeId;
+            vehicle.Year = Convert.ToInt32(attributes[(int)ControlMode.Year].AttributeText);
 
+            int results = 0;
+
+            Task.Run(async () =>
+            {
+                results = await VehicleManager.Update(vehicle);
+            });
+
+            MessageBox.Show("Update : " + (results));
         }
 
         private void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
+            vehicle.ColorId = attributes[(int)ControlMode.Color].AttributeId;
+            vehicle.MakeId = attributes[(int)ControlMode.Make].AttributeId;
+            vehicle.ModelId = attributes[(int)ControlMode.Model].AttributeId;
+            vehicle.Year = Convert.ToInt32(attributes[(int)ControlMode.Year].AttributeText);
 
+            int results = 0;
+
+            Task.Run(async () =>
+            {
+                results = await VehicleManager.Insert(vehicle);
+            });
+
+            MessageBox.Show("Insert : " + (results));
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
 
+            int results = 0;
+
+            Task.Run(async () =>
+            {
+                results = await VehicleManager.Delete(vehicle.Id);
+            });
+
+            MessageBox.Show("Delete : " + (results));
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
