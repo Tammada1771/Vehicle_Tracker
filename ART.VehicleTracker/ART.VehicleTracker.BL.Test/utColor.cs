@@ -53,28 +53,25 @@ namespace ART.VehicleTracker.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            Task.Run(async () =>
-            {
-                var task = await ColorManager.Load();
-                IEnumerable<Models.Color> colors = task;
+                var task = ColorManager.Load();
+                IEnumerable<Models.Color> colors = task.Result;
                 Models.Color color = colors.FirstOrDefault(c => c.Code == -99);
                 color.Description = "Update Color";
-                int results = await ColorManager.Update(color, true);
-                Assert.IsTrue(results > 0);
-            });
+                var results = ColorManager.Update(color, true);
+                Assert.IsTrue(results.Result > 0);
+
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            Task.Run(async () =>
-            {
-                var task = await ColorManager.Load();
-                IEnumerable<Models.Color> colors = task;
-                Models.Color color = colors.FirstOrDefault(c => c.Code == -99);
-                int results = await ColorManager.Delete(color.Id);
-                Assert.IsTrue(results > 0);
-            });
+            var task = ColorManager.Load();
+            IEnumerable<Models.Color> colors = task.Result;
+            Models.Color color = colors.FirstOrDefault(c => c.Code == -99);
+            color.Description = "Update Color";
+            var results = ColorManager.Delete(color.Id, true);
+            Assert.IsTrue(results.Result > 0);
+
         }
     }
 }

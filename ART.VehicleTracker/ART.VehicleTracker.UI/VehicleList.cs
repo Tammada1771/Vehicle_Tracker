@@ -30,7 +30,7 @@ namespace ART.VehicleTracker.UI
 
         private void BtnColors_Click(object sender, RoutedEventArgs e)
         {
-
+            new MaintainColor().ShowDialog();
         }
 
         private void BtnMakes_Click(object sender, RoutedEventArgs e)

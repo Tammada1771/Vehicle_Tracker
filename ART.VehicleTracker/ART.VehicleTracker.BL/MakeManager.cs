@@ -42,6 +42,37 @@ namespace ART.VehicleTracker.BL
             }
         }
 
+        public static int SyncInsert(Models.Make make, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+
+                    tblMake newrow = new tblMake();
+                    newrow.Id = Guid.NewGuid();
+                    newrow.Description = make.Description;
+
+                    make.Id = newrow.Id;
+
+                    dc.tblMakes.Add(newrow);
+                    int results = dc.SaveChanges();
+
+                    if (rollback) transaction.Rollback();
+
+                    return results;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public async static Task<Guid> Insert(string description, bool rollback = false)
         {
             try

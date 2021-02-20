@@ -114,10 +114,13 @@ namespace ART.VehicleTracker.UI
 
             int results = 0;
 
+            /*
             Task.Run(async () =>
             {
                 results = await VehicleManager.Insert(vehicle);
             });
+            */
+            results = VehicleManager.syncInsert(vehicle);
 
             MessageBox.Show("Insert : " + (results));
         }

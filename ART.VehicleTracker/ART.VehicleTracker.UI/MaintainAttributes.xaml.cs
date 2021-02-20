@@ -19,7 +19,7 @@ namespace ART.VehicleTracker.UI
     public enum ScreenMode
     {
         Make = 1,
-        Model = 2
+        Model = 2,
     }
     /// <summary>
     /// Interaction logic for MaintainAttributes.xaml
@@ -108,7 +108,7 @@ namespace ART.VehicleTracker.UI
 
         private void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
-
+            /*
             switch (screenMode)
             {
                 case ScreenMode.Make:
@@ -124,6 +124,20 @@ namespace ART.VehicleTracker.UI
                     });
                     break;
 
+            }
+            */
+
+            switch (screenMode)
+            {
+                case ScreenMode.Make:
+                        int results = MakeManager.SyncInsert(new Make { Description = txtDescription.Text });
+                    break;
+                case ScreenMode.Model:
+                    Task.Run(async () =>
+                    {
+                        int results = await ModelManager.Insert(new Model { Description = txtDescription.Text });
+                    });
+                    break;
 
             }
         }

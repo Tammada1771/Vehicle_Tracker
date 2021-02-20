@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ART.VehicleTracker.BL.Models\ART.VehicleTracker.BL.Models.csproj" />
     <ProjectReference Include="..\ART.VehicleTracker.BL\ART.VehicleTracker.BL.csproj" />
   </ItemGroup>

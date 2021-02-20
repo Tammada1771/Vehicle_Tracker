@@ -26,7 +26,43 @@ namespace ART.VehicleTracker.BL
                     newrow.Id = Guid.NewGuid();
                     newrow.ColorId = vehicle.ColorId;
                     newrow.MakeId = vehicle.MakeId;
-                    newrow.ModelId = vehicle.MakeId;
+                    newrow.ModelId = vehicle.ModelId;
+                    newrow.VIN = vehicle.VIN;
+                    newrow.Year = vehicle.Year;
+
+                    vehicle.Id = newrow.Id;
+
+                    dc.tblVehicles.Add(newrow);
+                    int results = dc.SaveChanges();
+
+                    if (rollback) transaction.Rollback();
+
+                    return results;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public static int syncInsert(Models.Vehicle vehicle, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+
+                    tblVehicle newrow = new tblVehicle();
+
+                    newrow.Id = Guid.NewGuid();
+                    newrow.ColorId = vehicle.ColorId;
+                    newrow.MakeId = vehicle.MakeId;
+                    newrow.ModelId = vehicle.ModelId;
                     newrow.VIN = vehicle.VIN;
                     newrow.Year = vehicle.Year;
 
