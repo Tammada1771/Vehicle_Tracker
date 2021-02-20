@@ -64,7 +64,8 @@ namespace ART.VehicleTracker.UI
         {
             switch (screenMode)
             {
-                
+
+                /*
                 case ScreenMode.Make:
                     Task.Run(async () =>
                     {
@@ -81,12 +82,24 @@ namespace ART.VehicleTracker.UI
                         await ModelManager.Update(model);
                     });
                     break;
+                */
+                case ScreenMode.Make:
+                        Make make = makes[cboAttribute.SelectedIndex];
+                        make.Description = txtDescription.Text;
+                        MakeManager.SyncUpdate(make);
+                    break;
+                case ScreenMode.Model:
+                        Model model = models[cboAttribute.SelectedIndex];
+                        model.Description = txtDescription.Text;
+                        ModelManager.SyncUpdate(model);
+                    break;
             }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             int results = 0;
+            /*
             switch (screenMode)
             {
                 case ScreenMode.Make:
@@ -102,6 +115,19 @@ namespace ART.VehicleTracker.UI
                         Guid id = models[cboAttribute.SelectedIndex].Id;
                         results = await ModelManager.Delete(id);
                     });
+                    break;
+            }
+            */
+
+            switch (screenMode)
+            {
+                case ScreenMode.Make:
+                        Guid id = makes[cboAttribute.SelectedIndex].Id;
+                        results = MakeManager.SyncDelete(id);
+                    break;
+                case ScreenMode.Model:
+                        Guid id2 = models[cboAttribute.SelectedIndex].Id;
+                        results = ModelManager.SyncDelete(id2);
                     break;
             }
         }
@@ -135,7 +161,7 @@ namespace ART.VehicleTracker.UI
                 case ScreenMode.Model:
                     Task.Run(async () =>
                     {
-                        int results = await ModelManager.Insert(new Model { Description = txtDescription.Text });
+                        int results = ModelManager.SyncInsert(new Model { Description = txtDescription.Text });
                     });
                     break;
 

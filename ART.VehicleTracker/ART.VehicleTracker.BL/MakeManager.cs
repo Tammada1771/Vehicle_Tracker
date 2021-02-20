@@ -120,7 +120,71 @@ namespace ART.VehicleTracker.BL
             }
         }
 
+        public static int SyncDelete(Guid id, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblMake row = dc.tblMakes.FirstOrDefault(c => c.Id == id);
+                    int results = 0;
+                    if (row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+
+                        dc.tblMakes.Remove(row);
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async static Task<int> Update(Models.Make make, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblMake row = dc.tblMakes.FirstOrDefault(c => c.Id == make.Id);
+                    int results = 0;
+                    if (row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+
+                        row.Description = make.Description;
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int SyncUpdate(Models.Make make, bool rollback = false)
         {
             try
             {

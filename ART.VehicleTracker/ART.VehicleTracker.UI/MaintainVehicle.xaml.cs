@@ -88,6 +88,7 @@ namespace ART.VehicleTracker.UI
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            
             vehicle.ColorId = attributes[(int)ControlMode.Color].AttributeId;
             vehicle.MakeId = attributes[(int)ControlMode.Make].AttributeId;
             vehicle.ModelId = attributes[(int)ControlMode.Model].AttributeId;
@@ -96,10 +97,16 @@ namespace ART.VehicleTracker.UI
 
             int results = 0;
 
+            /*
             Task.Run(async () =>
             {
                 results = await VehicleManager.Update(vehicle);
             });
+
+            MessageBox.Show("Update : " + (results));
+            */
+
+            results = VehicleManager.SyncUpdate(vehicle);
 
             MessageBox.Show("Update : " + (results));
         }
@@ -130,11 +137,13 @@ namespace ART.VehicleTracker.UI
 
             int results = 0;
 
+            /*
             Task.Run(async () =>
             {
                 results = await VehicleManager.Delete(vehicle.Id);
             });
-
+            */
+            results = VehicleManager.SyncDelete(vehicle.Id);
             MessageBox.Show("Delete : " + (results));
         }
 

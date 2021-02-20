@@ -42,6 +42,37 @@ namespace ART.VehicleTracker.BL
             }
         }
 
+        public static int SyncInsert(Models.Model model, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+
+                    tblModel newrow = new tblModel();
+                    newrow.Id = Guid.NewGuid();
+                    newrow.Description = model.Description;
+
+                    model.Id = newrow.Id;
+
+                    dc.tblModels.Add(newrow);
+                    int results = dc.SaveChanges();
+
+                    if (rollback) transaction.Rollback();
+
+                    return results;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public async static Task<Guid> Insert(string description, bool rollback = false)
         {
             try
@@ -89,7 +120,71 @@ namespace ART.VehicleTracker.BL
             }
         }
 
+        public static int SyncDelete(Guid id, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblModel row = dc.tblModels.FirstOrDefault(c => c.Id == id);
+                    int results = 0;
+                    if (row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+
+                        dc.tblModels.Remove(row);
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async static Task<int> Update(Models.Model model, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblModel row = dc.tblModels.FirstOrDefault(c => c.Id == model.Id);
+                    int results = 0;
+                    if (row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+
+                        row.Description = model.Description;
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int SyncUpdate(Models.Model model, bool rollback = false)
         {
             try
             {

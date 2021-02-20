@@ -137,7 +137,75 @@ namespace ART.VehicleTracker.BL
             }
         }
 
+        public static int SyncDelete(Guid id, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblVehicle row = dc.tblVehicles.FirstOrDefault(c => c.Id == id);
+                    int results = 0;
+                    if (row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+
+                        dc.tblVehicles.Remove(row);
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async static Task<int> Update(Models.Vehicle vehicle, bool rollback = false)
+        {
+            try
+            {
+                IDbContextTransaction transaction = null;
+                using (VehicleEntities dc = new VehicleEntities())
+                {
+                    tblVehicle row = dc.tblVehicles.FirstOrDefault(c => c.Id == vehicle.Id);
+                    int results = 0;
+                    if (row != null)
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+
+                        row.ColorId = vehicle.ColorId;
+                        row.MakeId = vehicle.MakeId;
+                        row.ModelId = vehicle.ModelId;
+                        row.VIN = vehicle.VIN;
+                        row.Year = vehicle.Year;
+
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int SyncUpdate(Models.Vehicle vehicle, bool rollback = false)
         {
             try
             {
