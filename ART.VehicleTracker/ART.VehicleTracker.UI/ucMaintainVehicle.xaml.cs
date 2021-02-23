@@ -38,9 +38,9 @@ namespace ART.VehicleTracker.UI
     {
 
         ControlMode controlmode;
-        List<BL.Models.Color> colors;
-        List<Make> makes;
-        List<Model> models;
+        public List<BL.Models.Color> colors { get; set; }
+        public List<Make> makes {get; set; }
+        public List<Model> models {get; set; }
         List<Year> years;
 
         public ucMaintainVehicle(ControlMode controlmode, Guid id)
@@ -53,6 +53,7 @@ namespace ART.VehicleTracker.UI
             Reload();
 
             cboAttribute.SelectedValue = id;
+            cboAttribute.Tag = controlmode;
         }
 
         public ucMaintainVehicle(ControlMode controlmode, int id)
@@ -65,6 +66,7 @@ namespace ART.VehicleTracker.UI
             Reload();
 
             cboAttribute.Text = id.ToString();
+            cboAttribute.Tag = controlmode;
         }
 
         private async void Reload()

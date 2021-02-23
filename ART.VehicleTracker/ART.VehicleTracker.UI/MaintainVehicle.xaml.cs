@@ -23,28 +23,28 @@ namespace ART.VehicleTracker.UI
     {
         ucMaintainVehicle[] attributes = new ucMaintainVehicle[4];
         Vehicle vehicle;
+        bool newVehicle;
 
-        //new vehicle
-
-        public MaintainVehicle()
-        {
-            InitializeComponent();
-            vehicle = new Vehicle();
-            this.Title = "New Vehicle";
-            DrawScreen();
-        }
-
-        //edit vehicle
 
         public MaintainVehicle(Vehicle vehicle)
         {
             InitializeComponent();
             this.vehicle = vehicle;
-            this.Title = "Edit Vehicle";
+            if(Guid.Empty == vehicle.Id)
+            {
+                this.Title = "New Vehicle";
+                newVehicle = true;
+            }
+            else
+            {
+                this.Title = "Edit Vehicle";
+                newVehicle = false;
+            }
+            btnUpdate.IsEnabled = !newVehicle;
+            btnDelete.IsEnabled = !newVehicle;
+            btnInsert.IsEnabled = newVehicle;
 
             DrawScreen();
-
-            txtVIN.Text = vehicle.VIN;
         }
 
         private void DrawScreen()
@@ -53,11 +53,17 @@ namespace ART.VehicleTracker.UI
             ucMaintainVehicle ucMakes = new ucMaintainVehicle(ControlMode.Make, vehicle.MakeId);
             ucMaintainVehicle ucModels = new ucMaintainVehicle(ControlMode.Model, vehicle.ModelId);
             ucMaintainVehicle ucYears = new ucMaintainVehicle(ControlMode.Year, vehicle.Year);
+            txtVIN.Text = vehicle.VIN;
 
             ucColors.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
             ucMakes.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
             ucModels.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
             ucYears.imgDelete.MouseLeftButtonUp += ImgDelete_MouseLeftButtonUp;
+
+            //ucColors.cboAttribute.SelectionChanged += CboAttribute_SelectionChanged;
+            //ucMakes.cboAttribute.SelectionChanged += CboAttribute_SelectionChanged;
+            //ucModels.cboAttribute.SelectionChanged += CboAttribute_SelectionChanged;
+
 
             ucColors.Margin = new Thickness(40, 25, 0, 0);
             ucMakes.Margin = new Thickness(40, 60, 0, 0);
@@ -88,10 +94,21 @@ namespace ART.VehicleTracker.UI
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            int index = 0;
             
             vehicle.ColorId = attributes[(int)ControlMode.Color].AttributeId;
+            index = attributes[(int)ControlMode.Color].cboAttribute.SelectedIndex;
+            vehicle.ColorName = attributes[(int)ControlMode.Color].colors[index].Description;
+
             vehicle.MakeId = attributes[(int)ControlMode.Make].AttributeId;
+            index = attributes[(int)ControlMode.Make].cboAttribute.SelectedIndex;
+            vehicle.MakeName = attributes[(int)ControlMode.Make].makes[index].Description;
+
             vehicle.ModelId = attributes[(int)ControlMode.Model].AttributeId;
+            index = attributes[(int)ControlMode.Model].cboAttribute.SelectedIndex;
+            vehicle.ModelName = attributes[(int)ControlMode.Model].models[index].Description;
+
+
             vehicle.Year = Convert.ToInt32(attributes[(int)ControlMode.Year].AttributeText);
             vehicle.VIN = txtVIN.Text;
 
@@ -107,15 +124,27 @@ namespace ART.VehicleTracker.UI
             */
 
             results = VehicleManager.SyncUpdate(vehicle);
+            this.Close();
 
-            MessageBox.Show("Update : " + (results));
         }
 
         private void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
+            int index = 0;
+
             vehicle.ColorId = attributes[(int)ControlMode.Color].AttributeId;
+            index = attributes[(int)ControlMode.Color].cboAttribute.SelectedIndex;
+            vehicle.ColorName = attributes[(int)ControlMode.Color].colors[index].Description;
+
             vehicle.MakeId = attributes[(int)ControlMode.Make].AttributeId;
+            index = attributes[(int)ControlMode.Make].cboAttribute.SelectedIndex;
+            vehicle.MakeName = attributes[(int)ControlMode.Make].makes[index].Description;
+
             vehicle.ModelId = attributes[(int)ControlMode.Model].AttributeId;
+            index = attributes[(int)ControlMode.Model].cboAttribute.SelectedIndex;
+            vehicle.ModelName = attributes[(int)ControlMode.Model].models[index].Description;
+
+
             vehicle.Year = Convert.ToInt32(attributes[(int)ControlMode.Year].AttributeText);
             vehicle.VIN = txtVIN.Text;
 
@@ -128,8 +157,7 @@ namespace ART.VehicleTracker.UI
             });
             */
             results = VehicleManager.syncInsert(vehicle);
-
-            MessageBox.Show("Insert : " + (results));
+            this.Close();
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -144,7 +172,7 @@ namespace ART.VehicleTracker.UI
             });
             */
             results = VehicleManager.SyncDelete(vehicle.Id);
-            MessageBox.Show("Delete : " + (results));
+            this.Close();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

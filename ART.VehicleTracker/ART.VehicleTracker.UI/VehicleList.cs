@@ -23,7 +23,10 @@ namespace ART.VehicleTracker.UI
     public partial class VehicleList : Window
     {
         List<Vehicle> vehicles;
+        List<Vehicle> filteredVehicles;
+        List<BL.Models.Color> colors;
         public VehicleList()
+
         {
             InitializeComponent();
         }
@@ -48,11 +51,11 @@ namespace ART.VehicleTracker.UI
             Reload();
         }
 
-        private async void Reload()
+        private async void Rebind()
         {
-            vehicles = (List<Vehicle>)await VehicleManager.Load();
+
             grdVehicles.ItemsSource = null;
-            grdVehicles.ItemsSource = vehicles;
+            grdVehicles.ItemsSource = filteredVehicles;
 
             //0, 3, 4,5 
             grdVehicles.Columns[0].Visibility = Visibility.Hidden;
@@ -64,24 +67,61 @@ namespace ART.VehicleTracker.UI
             grdVehicles.Columns[6].Header = "Color";
             grdVehicles.Columns[7].Header = "Make";
             grdVehicles.Columns[8].Header = "Model";
+        }
+
+        private async void Reload()
+        {
+            vehicles = (List<Vehicle>)await VehicleManager.Load();
+            filteredVehicles = vehicles;
+            colors = (List<BL.Models.Color>)await ColorManager.Load();
+            cboFilter.ItemsSource = null;
+            cboFilter.ItemsSource = colors;
+            cboFilter.DisplayMemberPath = "Description";
+            cboFilter.SelectedValuePath = "Id";
+
+            Rebind();
 
         }
 
         private void BtnNewVehicle_Click(object sender, RoutedEventArgs e)
         {
-            new MaintainVehicle().ShowDialog();
-            Reload();
+            Vehicle vehicle = new Vehicle();
+            MaintainVehicle maintainVehicle = new MaintainVehicle(vehicle);
+            maintainVehicle.Owner = this;
+            maintainVehicle.ShowDialog();
+
+            vehicles.Add(vehicle);
+            Rebind();
         }
 
         private void BtnEditVehicle_Click(object sender, RoutedEventArgs e)
         {
-            new MaintainVehicle(vehicles[grdVehicles.SelectedIndex]).ShowDialog();
-            Reload();
+            Vehicle vehicle = vehicles[grdVehicles.SelectedIndex];
+            MaintainVehicle maintainVehicle = new MaintainVehicle(vehicle);
+            maintainVehicle.Owner = this;
+            maintainVehicle.ShowDialog();
+
+            vehicles[grdVehicles.SelectedIndex] = vehicle;
+            Rebind();
         }
 
         private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Reload();
+        }
+
+        private void cboFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cboFilter.SelectedIndex > -1)
+            {
+                filteredVehicles = vehicles.Where(v => v.ColorId == colors[cboFilter.SelectedIndex].Id).ToList();
+                Rebind();
+            }
         }
     }
 }

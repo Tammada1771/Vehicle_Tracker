@@ -1,4 +1,4 @@
 ﻿ALTER TABLE [dbo].[tblVehicle]
 	ADD CONSTRAINT [tblVehicle_ModelId]
 	FOREIGN KEY (ModelId)
-	REFERENCES [tblModel] (Id) ON DELETE CASCADE
+	REFERENCES [tblModel] (Id) ON DELETE NO ACTION
