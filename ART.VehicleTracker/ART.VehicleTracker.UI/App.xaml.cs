@@ -15,16 +15,14 @@ namespace ART.VehicleTracker.UI
     /// </summary>
     public partial class App : Application
     {
+        ServiceProvider serviceprovider;
         public App()
         {
             var services = new ServiceCollection();
             ConfigureServices(services);
-            using (ServiceProvider serviceProvider = services.BuildServiceProvider())
-            {
-                var vehicleList = serviceProvider.GetRequiredService<VehicleList>();
-                Application.Current.Run(vehicleList);
 
-            }
+            serviceprovider = services.BuildServiceProvider();
+
         }
 
         private void ConfigureServices(ServiceCollection services)
@@ -32,6 +30,12 @@ namespace ART.VehicleTracker.UI
             services.AddSingleton<VehicleList>()
                 .AddLogging(configure => configure.AddEventLog())
                 .AddLogging(configure => configure.AddDebug());
+        }
+
+        private void OnStartUp(object sender, StartupEventArgs e)
+        {
+            var vehicleList = serviceprovider.GetService<VehicleList>();
+            vehicleList.Show();
         }
     }
 }
