@@ -105,7 +105,7 @@ namespace ART.VehicleTracker.UI
             setterRow.Value = Brushes.Blue;
             setterRow.Property = Control.BackgroundProperty;
             setterRow.Value = Brushes.Pink;
-            grdVehicles.RowStyle.Setters.Add(setterRow);
+           // grdVehicles.RowStyle.Setters.Add(setterRow);
         }
 
         private async void Reload()
