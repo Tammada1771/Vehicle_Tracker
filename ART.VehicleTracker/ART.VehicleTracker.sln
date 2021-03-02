@@ -7,15 +7,17 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ART.VehicleTracker.DB", "AR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.BL.Models", "ART.VehicleTracker.BL.Models\ART.VehicleTracker.BL.Models.csproj", "{B9EE75B3-CC8B-48C5-94DD-093D41A53FAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.PL", "ART.VehicleTracker.PL\ART.VehicleTracker.PL.csproj", "{EB6AEC71-AFE9-4E0C-96FE-0D7D15466CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.PL", "ART.VehicleTracker.PL\ART.VehicleTracker.PL.csproj", "{EB6AEC71-AFE9-4E0C-96FE-0D7D15466CFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.PL.Test", "ART.VehicleTracker.PL.Test\ART.VehicleTracker.PL.Test.csproj", "{9588313C-149F-448B-8553-53CA4B683D45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.PL.Test", "ART.VehicleTracker.PL.Test\ART.VehicleTracker.PL.Test.csproj", "{9588313C-149F-448B-8553-53CA4B683D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.BL", "ART.VehicleTracker.BL\ART.VehicleTracker.BL.csproj", "{DC0B8515-A09D-454E-AC88-7DACB2AD12EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.BL", "ART.VehicleTracker.BL\ART.VehicleTracker.BL.csproj", "{DC0B8515-A09D-454E-AC88-7DACB2AD12EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.BL.Test", "ART.VehicleTracker.BL.Test\ART.VehicleTracker.BL.Test.csproj", "{B187D343-BC0A-48BB-A8C6-05F51666DF8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.BL.Test", "ART.VehicleTracker.BL.Test\ART.VehicleTracker.BL.Test.csproj", "{B187D343-BC0A-48BB-A8C6-05F51666DF8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.UI", "ART.VehicleTracker.UI\ART.VehicleTracker.UI.csproj", "{F685705B-6E4A-494A-B75C-CC2D358B1400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.UI", "ART.VehicleTracker.UI\ART.VehicleTracker.UI.csproj", "{F685705B-6E4A-494A-B75C-CC2D358B1400}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.API", "ART.VehicleTracker.API\ART.VehicleTracker.API.csproj", "{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{F685705B-6E4A-494A-B75C-CC2D358B1400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F685705B-6E4A-494A-B75C-CC2D358B1400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F685705B-6E4A-494A-B75C-CC2D358B1400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
