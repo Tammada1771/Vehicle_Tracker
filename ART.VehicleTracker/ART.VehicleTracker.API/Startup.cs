@@ -32,6 +32,13 @@ namespace ART.VehicleTracker.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ART.VehicleTracker.API", Version = "v1" });
             });
+
+            services.AddHttpClient("vehicletrackerapi", c =>
+            {
+                c.BaseAddress = new Uri("https://localhost:44376/Color");
+                c.DefaultRequestHeaders.Add("Accept", "*.*");
+                c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-Sample");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

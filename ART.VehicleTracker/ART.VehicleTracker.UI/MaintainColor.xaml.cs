@@ -1,7 +1,10 @@
 ﻿using ART.VehicleTracker.BL;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -125,9 +128,32 @@ namespace ART.VehicleTracker.UI
             Reload();
         }
 
+        private static HttpClient InitializeClient()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44376/");
+            return client;
+        }
+
         private async void Reload()
         {
-            colors = (List<BL.Models.Color>)await ColorManager.Load();
+            //colors = (List<BL.Models.Color>)await ColorManager.Load();
+
+            HttpClient client = InitializeClient();
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            // Call the API Color Controller/Get
+            response = client.GetAsync("Color").Result;
+            //Get the JSON response
+            result = response.Content.ReadAsStringAsync().Result;
+            // Split the JSON response into a JArray
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            //Convert the JArray to List<Color>
+            colors = items.ToObject<List<Color>>();
+
+
             cboAttribute.ItemsSource = null;
             cboAttribute.ItemsSource = colors;
             cboAttribute.DisplayMemberPath = "Description";
