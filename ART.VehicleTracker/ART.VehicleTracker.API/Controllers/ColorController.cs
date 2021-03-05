@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ART.VehicleTracker.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ColorController : ControllerBase
     {

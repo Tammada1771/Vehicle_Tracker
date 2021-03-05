@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ART.VehicleTracker.UI"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MaintainColor" Height="250" Width="400" Loaded="Window_Loaded">
+        Title="MaintainColor" Height="250" Width="400" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

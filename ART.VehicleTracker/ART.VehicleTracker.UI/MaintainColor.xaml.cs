@@ -44,10 +44,19 @@ namespace ART.VehicleTracker.UI
                                                                cpCode.SelectedColor.Value.R,
                                                                 0x00 }, 0);
 
-                Task.Run(async () =>
-                {
-                    int results = await ColorManager.Insert(color);
-                });
+                HttpClient client = InitializeClient();
+                string SerializedObject = JsonConvert.SerializeObject(color);
+                var content = new StringContent(SerializedObject);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                HttpResponseMessage response = client.PostAsync("Color", content).Result;
+
+                //Task.Run(async () =>
+                //{
+                //    int results = await ColorManager.Insert(color);
+                //});
+
+                colors.Add(color);
+                Rebind(colors.Count - 1);
             }
             catch (Exception ex)
             {
@@ -68,10 +77,19 @@ namespace ART.VehicleTracker.UI
                                                                cpCode.SelectedColor.Value.R,
                                                                 0x00 }, 0);
 
-                Task.Run(async () =>
-                {
-                    int results = await ColorManager.Update(color);
-                });
+                HttpClient client = InitializeClient();
+                string SerializedObject = JsonConvert.SerializeObject(color);
+                var content = new StringContent(SerializedObject);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                HttpResponseMessage response = client.PutAsync("Color/" + color.Id, content).Result;
+
+                //Task.Run(async () =>
+                //{
+                //    int results = await ColorManager.Update(color);
+                //});
+
+                colors[cboAttribute.SelectedIndex] = color;
+                Rebind(cboAttribute.SelectedIndex);
             }
             catch (Exception ex)
             {
@@ -86,10 +104,17 @@ namespace ART.VehicleTracker.UI
             {
                 color = colors[cboAttribute.SelectedIndex];
 
-                Task.Run(async () =>
-                {
-                    int results = await ColorManager.Delete(color.Id);
-                });
+                HttpClient client = InitializeClient();
+                HttpResponseMessage response = client.DeleteAsync("Color?id=" + color.Id).Result;
+
+
+                //Task.Run(async () =>
+                //{
+                //    int results = await ColorManager.Delete(color.Id);
+                //});
+
+                colors.Remove(color);
+                Rebind(0);
 
             }
             catch (Exception ex)
@@ -135,6 +160,15 @@ namespace ART.VehicleTracker.UI
             return client;
         }
 
+        private async void Rebind(int index)
+        {
+            cboAttribute.ItemsSource = null;
+            cboAttribute.ItemsSource = colors;
+            cboAttribute.DisplayMemberPath = "Description";
+            cboAttribute.SelectedValuePath = "Id";
+            cboAttribute.SelectedIndex = index;
+        }
+
         private async void Reload()
         {
             //colors = (List<BL.Models.Color>)await ColorManager.Load();
@@ -151,13 +185,9 @@ namespace ART.VehicleTracker.UI
             // Split the JSON response into a JArray
             items = (JArray)JsonConvert.DeserializeObject(result);
             //Convert the JArray to List<Color>
-            colors = items.ToObject<List<Color>>();
+            colors = items.ToObject<List<BL.Models.Color>>();
 
-
-            cboAttribute.ItemsSource = null;
-            cboAttribute.ItemsSource = colors;
-            cboAttribute.DisplayMemberPath = "Description";
-            cboAttribute.SelectedValuePath = "Id";
+            Rebind(0);
         }
     }
 }
