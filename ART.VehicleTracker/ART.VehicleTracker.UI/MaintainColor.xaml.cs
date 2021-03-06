@@ -156,7 +156,8 @@ namespace ART.VehicleTracker.UI
         private static HttpClient InitializeClient()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44376/");
+            //client.BaseAddress = new Uri("https://localhost:44376/");
+            client.BaseAddress = new Uri("https://vehicletrackerapi.azurewebsites.net/api/");
             return client;
         }
 
