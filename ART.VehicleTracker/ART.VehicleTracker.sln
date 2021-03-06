@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.BL.Test"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.UI", "ART.VehicleTracker.UI\ART.VehicleTracker.UI.csproj", "{F685705B-6E4A-494A-B75C-CC2D358B1400}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.API", "ART.VehicleTracker.API\ART.VehicleTracker.API.csproj", "{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ART.VehicleTracker.API", "ART.VehicleTracker.API\ART.VehicleTracker.API.csproj", "{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.VehicleTracker.Web", "ART.VehicleTracker.Web\ART.VehicleTracker.Web.csproj", "{49AC367E-ACBE-455D-9DD6-386C8C45EB3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FCE3569-B095-49F2-BCF1-5F7AF8FBF43E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49AC367E-ACBE-455D-9DD6-386C8C45EB3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49AC367E-ACBE-455D-9DD6-386C8C45EB3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49AC367E-ACBE-455D-9DD6-386C8C45EB3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49AC367E-ACBE-455D-9DD6-386C8C45EB3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
