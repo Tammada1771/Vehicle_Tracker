@@ -24,9 +24,14 @@ namespace ART.VehicleTracker.Web.Controllers
             response = client.GetAsync("Vehicle").Result;
             result = response.Content.ReadAsStringAsync().Result;
             items = (JArray)JsonConvert.DeserializeObject(result);
-            List<Vehicle> vehicles = items.TOObject<List<Vehicle>>();
+            List<Vehicle> vehicles = items.ToObject<List<Vehicle>>();
 
             return View(vehicles);
+        }
+
+        public IActionResult Chat()
+        {
+            return View();
         }
 
 
@@ -39,7 +44,7 @@ namespace ART.VehicleTracker.Web.Controllers
         private static HttpClient InitializeClient()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44325/api/");
+            client.BaseAddress = new Uri("https://localhost:44376/api/");
             return client;
         }
 
