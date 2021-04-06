@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ART.Utilities.Reporting;
 using ART.VehicleTracker.BL.Models;
 using ART.VehicleTracker.PL;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -334,6 +335,41 @@ namespace ART.VehicleTracker.BL
                         }));
                     return vehicles;
                 }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public static void Export(List<Vehicle> vehicles)
+        {
+            try
+            {
+                string[,] data = new string[vehicles.Count + 1, 5];
+                int counter = 0;
+
+                data[counter, 0] = "VIN";
+                data[counter, 1] = "Model";
+                data[counter, 2] = "Make";
+                data[counter, 3] = "Color";
+                data[counter, 4] = "Year";
+
+                counter++;
+
+                foreach (Vehicle v in vehicles)
+                {
+                    data[counter, 0] = v.VIN;
+                    data[counter, 1] = v.ModelName;
+                    data[counter, 2] = v.MakeName;
+                    data[counter, 3] = v.ColorName;
+                    data[counter, 4] = v.Year.ToString();
+
+                    counter++;
+                }
+
+                Excel.Export("Vehicles", data);
             }
             catch (Exception ex)
             {

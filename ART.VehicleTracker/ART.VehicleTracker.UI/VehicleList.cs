@@ -158,7 +158,17 @@ namespace ART.VehicleTracker.UI
 
         private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (vehicles != null)
+                {
+                    VehicleManager.Export(vehicles);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Error Exporting Vehicles: " + ex.Message);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ART.Utilities.Reporting\ART.Utilities.Reporting.csproj" />
     <ProjectReference Include="..\ART.VehicleTracker.BL.Models\ART.VehicleTracker.BL.Models.csproj" />
     <ProjectReference Include="..\ART.VehicleTracker.PL\ART.VehicleTracker.PL.csproj" />
   </ItemGroup>
